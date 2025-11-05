@@ -5,7 +5,8 @@ using namespace std;
 
 int main() {
     critter a;
-    a.name = "abc";
+    a.name = "Bebe";
     a.info();
+    a.status();
     return 0;
 }
