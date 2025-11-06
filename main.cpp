@@ -1,23 +1,48 @@
 // Created by Helena Grzelak on 05/11/2025.
 #include <iostream>
+#include <vector>
 #include "critter_class.h"
 using namespace std;
 
-int main() {
-    critter a;
-    a.name = "Bebe";
-    a.info();
-    a.status();
-    cout << "Testing feeding and hunger:"<<endl;
-    cout << "+ 2"<<endl<<a.update_hunger(2)<<endl;
-    cout << "+ 5"<<endl<<a.update_hunger(5)<<endl;
-    cout << "+ 4"<<endl<<a.update_hunger(4)<<endl;
-    cout << "+ 4"<<endl<<a.update_hunger(4)<<endl;
+//Array with the critters
+vector <critter> c;
+//Index of current critter
+int curr = 0;
 
-    cout << "Testing levels:"<<endl;
-    cout << "+ 4"<<endl<<a.update_level(4)<<endl;
-    cout << "+ 12"<<endl<<a.update_level(12)<<endl;
-    cout << "+ 4"<<endl<<a.update_level(4)<<endl;
-    cout << "+ 42"<<endl<<a.update_level(42)<<endl;
+string input() {
+    string type;
+    cout << "▷ ";
+    cin >> type;
+    return type;
+}
+
+bool selection() {
+    cout << "What do you want to do?"<<endl;
+    cout <<"1 - INFO"<<"      4 - PLAY"<<endl<<"2 - CHECK"<<"     5 - MORE"<<endl<<"3 - FEED"<<"      6 - EXIT PROGRAM"<<endl<<endl;
+    int x = 0;
+    x = stoi(input());
+    switch (x) {
+        case 1: c[curr].info();break;
+        case 2: c[curr].status();break;
+        case 3: cout << "feed"<<endl;break;
+        case 4: cout << "play"<<endl;break;
+        case 5: cout << "more"<<endl;break;
+        case 6: return false;
+    }
+    return true;
+}
+
+
+
+int main() {
+    bool cont = true;
+    critter first_critter;
+    first_critter.name_critter();
+    c.push_back(first_critter);
+
+    while (cont) {
+        cont = selection();
+    }
+
     return 0;
 }

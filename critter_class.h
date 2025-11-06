@@ -9,6 +9,14 @@ public:
         cout << "A new critter has been born!" << endl;
         name="";
     }
+
+    void name_critter() {
+        string n;
+        cout << "hat name do you want to give your critter?"<<endl<< "▷ ";
+        cin >> n;
+        n = capitalize(n);
+        name = n;
+    }
     void info() {
         cout << "   INFO"<< endl;
         cout<<"---------------"<<endl;
@@ -59,5 +67,15 @@ private:
             x += "□";
         }
         return x;
+    }
+    string capitalize(string n2)
+    {
+        string n, n1;
+        n1 = n2[0];
+        transform(n2.begin(),n2.end(),n2.begin(),::tolower);
+        transform(n1.begin(),n1.end(),n1.begin(),::toupper);
+        n2 = n2.substr(1,n2.size());
+        n = ""+n1+n2;
+        return n;
     }
 };
