@@ -40,7 +40,7 @@ public:
     string update_hunger(int amount) {
         string x = "";
         hunger += amount;
-        if (hunger>10) {
+        if (hunger>=10) {
             hunger = 10;
             x = name + " is full! \n";
             x += "Hunger ";
@@ -52,6 +52,16 @@ public:
             x= x+ "Hunger " + status_str(hunger);
         }
         return x;
+    }
+    string capitalize(string n2)
+    {
+        string n, n1;
+        n1 = n2[0];
+        transform(n2.begin(),n2.end(),n2.begin(),::tolower);
+        transform(n1.begin(),n1.end(),n1.begin(),::toupper);
+        n2 = n2.substr(1,n2.size());
+        n = ""+n1+n2;
+        return n;
     }
 
 private:
@@ -67,15 +77,5 @@ private:
             x += "□";
         }
         return x;
-    }
-    string capitalize(string n2)
-    {
-        string n, n1;
-        n1 = n2[0];
-        transform(n2.begin(),n2.end(),n2.begin(),::tolower);
-        transform(n1.begin(),n1.end(),n1.begin(),::toupper);
-        n2 = n2.substr(1,n2.size());
-        n = ""+n1+n2;
-        return n;
     }
 };
