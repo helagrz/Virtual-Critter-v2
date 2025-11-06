@@ -13,6 +13,7 @@ string input() {
     string type;
     cout << "▷ ";
     cin >> type;
+    transform(type.begin(),type.end(),type.begin(),::tolower);
     return type;
 }
 
@@ -46,18 +47,32 @@ void more() {
                 a = input();
             }
             a = c[curr].capitalize(a);
-            cout << c[curr].name<<" is now "<< a;
+            cout << c[curr].name<<" is now "<< a<<endl;
             c[curr].name = a;
             break;
         }
         case 3: cout << "save()"<<endl; break;
         case 4: cout << "load()"<<endl; break;
-        case 5:
-            cout << "create()"<<endl;
+        case 5: {
+            cout << "Are you sure you want to add another critter? (To proceed enter \'yes\')"<<endl;
+            string a = input();
+            if (a == "yes") {
+                c.push_back(critter());
+                curr++;
+                c[curr].name_critter();
+                c[curr].info();
+            }
             break;
-        case 6:
-            cout << "remove()"<<endl;
+        }
+        case 6:{
+            cout << "Are you sure? (To proceed enter \'yes\')"<<endl;
+            string a = input();
+            if (a == "yes") {
+                c.erase(c.begin()+curr);
+                curr=c.size()-1;
+            }
             break;
+            }
         case 7:
             cout << "reset()"<<endl;
             break;
@@ -89,9 +104,8 @@ bool selection() {
 
 int main() {
     bool cont = true;
-    critter first_critter;
-    first_critter.name_critter();
-    c.push_back(first_critter);
+    c.push_back(critter());
+    c[curr].name_critter();
 
     while (cont) {
         cont = selection();
