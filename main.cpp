@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "critter_class.h"
+#include "games.cpp"
 using namespace std;
 
 //Array with the critters
@@ -19,6 +20,18 @@ string input() {
 
 void feed() {
     cout << c[curr].update_hunger(2)<<endl;
+}
+
+void play() {
+    cout << "What game do you want to play?"<<endl;
+    cout << "1 - TICTACTOE"<<endl<<"2 - GAME 2"<<endl<<"3 - BACK"<<endl<<endl;
+    int x = 0;
+    x = stoi(input());
+    switch (x) {
+        case 1: tictactoe(c[curr].name);break;
+        case 2: game2(c[curr].name);break;
+    }
+
 }
 
 bool valid_name(string x) {
@@ -113,7 +126,7 @@ bool selection() {
         case 1: c[curr].info();break;
         case 2: c[curr].status();break;
         case 3: feed();break;
-        case 4: cout << "play"<<endl;break;
+        case 4: play();break;
         case 5: more();break;
         case 6: cout << "See you later!";return false;
     }
