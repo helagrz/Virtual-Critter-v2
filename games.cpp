@@ -67,12 +67,12 @@ bool check_space(string tab[]) {
     return false;
 }
 
-void tictactoe(string name) {
+bool tictactoe(string name) {
+    srand(time(0));
     string tab[9];
     for (int i=0;i<9;i++) {
         tab[i]="   ";
     }
-    /*
     cout << "You choose to play tictactoe with "<<name<<endl<<endl;
     cout << "    TICTACTOE   "<<endl;
     cout<<"-----------------"<<endl;
@@ -95,9 +95,7 @@ void tictactoe(string name) {
     cout << "You play "<<s<<endl;
     cout << name << " plays "<<cs<<endl<<endl;
     cout<<"Who will start will be chosen randomly..."<<endl;
-    */
     int x;
-    string s ="X", cs="O";
     if (random_int_in_range(0,1)) {
         cout << "You start!"<<endl;;
         show_table(tab);
@@ -161,15 +159,19 @@ void tictactoe(string name) {
         if(winner ==s){cout << "Congratulations!"<<endl;}
         else{cout << "You lose, "<<name<< " wins!"<<endl;}
     }
+
+    cout << "Do you want to play again? (enter \'yes\')"<<endl;
+    string answer;
+    cout << "▷ ";
+    cin >> answer;
+    if (answer=="yes") {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 void game2(string name) {
     cout << "You choose to play game2 with "<<name<<endl;
-}
-
-//function "int main(){}" for testing purposes
-int main() {
-    srand(time(0));
-    tictactoe("Critter");
-    return 0;
 }

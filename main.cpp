@@ -28,7 +28,10 @@ void play() {
     int x = 0;
     x = stoi(input());
     switch (x) {
-        case 1: tictactoe(c[curr].name);break;
+        case 1: {
+            while (tictactoe(c[curr].name)) {}
+            break;
+        }
         case 2: game2(c[curr].name);break;
     }
 
@@ -132,7 +135,7 @@ bool selection() {
     }
     return true;
 }
-/*
+
 int main() {
     bool cont = true;
     c.push_back(critter());
@@ -144,4 +147,3 @@ int main() {
 
     return 0;
 }
-*/
