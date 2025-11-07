@@ -132,7 +132,7 @@ bool selection() {
     }
     return true;
 }
-
+/*
 int main() {
     bool cont = true;
     c.push_back(critter());
@@ -144,3 +144,4 @@ int main() {
 
     return 0;
 }
+*/
