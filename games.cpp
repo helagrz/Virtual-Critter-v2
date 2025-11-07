@@ -16,6 +16,35 @@ void show_table(string tab[]) {
     cout << tab[6]<<"|"<<tab[7]<<"|"<<tab[8]<<endl;
 }
 
+bool get_3(string a, string b, string c) {
+    if((a!= "   " and a==b and c=="   ")or(b!= "   " and b==c and a=="   ")or(a!= "   " and a==c and b=="   ")){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+int advanced_move(string tab[]) {
+    int pos[24]={0,1,2,3,4,5,6,7,8, 0,3,6,1,4,7,2,5,8 ,0,4,8,2,4,6};
+    int i = 0;
+    for (int j=0;j<8;j++) {
+        if (get_3(tab[pos[i]],tab[pos[i+1]],tab[pos[i+2]])) {
+            if (tab[pos[i]]=="   ") {
+                return pos[i];
+            }
+            else if (tab[pos[i+1]]=="   ") {
+                return pos[i+1];
+            }
+            else {
+                return pos[i+2];
+            }
+        }
+        i+=3;
+    }
+    return -1;
+}
+
 bool check(string tab[]) {
     if(((tab[0]==tab[1] and tab[1]==tab[2]) and tab[0]!="   ") or ((tab[3]==tab[4] and tab[4]==tab[5])and tab[3]!="   ") or ((tab[6]==tab[7] and tab[7]==tab[8])and tab[6]!="   ")) {
         return true;
@@ -104,11 +133,16 @@ void tictactoe(string name) {
 
         if (win==false and space==true) {
             cout << name << "'s turn"<<endl;
-            x = random_int_in_range(1,9);
-            while (tab[x-1]!="   ") {
+            if (advanced_move(tab)==-1) {
                 x = random_int_in_range(1,9);
+                while (tab[x-1]!="   ") {
+                    x = random_int_in_range(1,9);
+                }
+                tab[x-1]=" "+cs+" ";
             }
-            tab[x-1]=" "+cs+" ";
+            else {
+                tab[advanced_move(tab)]=" "+cs+" ";
+            }
             show_table(tab);
             winner = cs;
             win = check(tab);
