@@ -16,6 +16,28 @@ void show_table(string tab[]) {
     cout << tab[6]<<"|"<<tab[7]<<"|"<<tab[8]<<endl;
 }
 
+bool check(string tab[]) {
+    if(((tab[0]==tab[1] and tab[1]==tab[2]) and tab[0]!="   ") or ((tab[3]==tab[4] and tab[4]==tab[5])and tab[3]!="   ") or ((tab[6]==tab[7] and tab[7]==tab[8])and tab[6]!="   ")) {
+        return true;
+    }
+    else if((tab[0]==tab[3] and tab[3]==tab[6]and tab[3]!="   ") or (tab[1]==tab[4] and tab[4]==tab[7]and tab[4]!="   ") or (tab[2]==tab[5] and tab[5]==tab[8]and tab[2]!="   ")) {
+        return true;
+    }
+    else if((tab[0]==tab[4] and tab[4]==tab[8]and tab[4]!="   ")or (tab[2]==tab[4] and tab[4]==tab[6])and tab[2]!="   "){
+        return true;
+    }
+    else{return false;}
+}
+
+bool check_space(string tab[]) {
+    for (int i=0; i<9;i++) {
+        if (tab[i]=="   ") {
+            return true;
+        }
+    }
+    return false;
+}
+
 void tictactoe(string name) {
     string tab[9];
     for (int i=0;i<9;i++) {
@@ -45,22 +67,27 @@ void tictactoe(string name) {
     cout << name << " plays "<<cs<<endl<<endl;
     cout<<"Who will start will be chosen randomly..."<<endl;
     */
+    int x;
     string s ="X", cs="O";
     if (random_int_in_range(0,1)) {
         cout << "You start!"<<endl;;
+        show_table(tab);
     }
     else {
         cout << name <<" starts!"<<endl;
+        x = random_int_in_range(1,9);
+        tab[x-1]=" "+cs+" ";
+        show_table(tab);
+        cout << "Your turn"<<endl;
     }
     //win - Did someone win?, space - Is there any space available?
     bool win=false, space = true;
     string winner = "";
-    int x;
 
     while (win==false and space==true) {
         cout << "▷ ";
         cin >> x;
-        while (x>9 and x<1) {
+        while (x>9 or x<1) {
             cout << "Enter numbers 1-9"<<endl<< "▷ ";
             cin >> x;
         }
@@ -70,8 +97,36 @@ void tictactoe(string name) {
         }
         tab[x-1]=" "+s+" ";
         show_table(tab);
-    }
 
+        win = check(tab);
+        space = check_space(tab);
+        winner = s;
+
+        if (win==false and space==true) {
+            cout << name << "'s turn"<<endl;
+            x = random_int_in_range(1,9);
+            while (tab[x-1]!="   ") {
+                x = random_int_in_range(1,9);
+            }
+            tab[x-1]=" "+cs+" ";
+            show_table(tab);
+            winner = cs;
+            win = check(tab);
+            space = check_space(tab);
+
+            if (space==true) {
+                cout << "Your turn"<<endl;
+            }
+        }
+    }
+    if(space==false and win==false) {
+        cout <<"No space left, nobody wins"<<endl;
+    }
+    else {
+        cout << winner<<" wins!"<<endl;
+        if(winner ==s){cout << "Congratulations!"<<endl;}
+        else{cout << "You lose, "<<name<< " wins!"<<endl;}
+    }
 }
 
 void game2(string name) {
