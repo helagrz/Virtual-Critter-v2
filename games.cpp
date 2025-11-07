@@ -3,7 +3,25 @@
 #include <iostream>
 using namespace std;
 
+int random_int_in_range(int a, int b) {
+    int answer = rand()%(b-a+1)+a;
+    return answer;
+}
+
+void show_table(string tab[]) {
+    cout << tab[0]<<"|"<<tab[1]<<"|"<<tab[2]<<endl;
+    cout << "---------"<<endl;
+    cout << tab[3]<<"|"<<tab[4]<<"|"<<tab[5]<<endl;
+    cout << "---------"<<endl;
+    cout << tab[6]<<"|"<<tab[7]<<"|"<<tab[8]<<endl;
+}
+
 void tictactoe(string name) {
+    string tab[9];
+    for (int i=0;i<9;i++) {
+        tab[i]="   ";
+    }
+    /*
     cout << "You choose to play tictactoe with "<<name<<endl<<endl;
     cout << "    TICTACTOE   "<<endl;
     cout<<"-----------------"<<endl;
@@ -24,7 +42,36 @@ void tictactoe(string name) {
     else {cs = "X";}
 
     cout << "You play "<<s<<endl;
-    cout << name << " plays "<<cs<<endl;
+    cout << name << " plays "<<cs<<endl<<endl;
+    cout<<"Who will start will be chosen randomly..."<<endl;
+    */
+    string s ="X", cs="O";
+    if (random_int_in_range(0,1)) {
+        cout << "You start!"<<endl;;
+    }
+    else {
+        cout << name <<" starts!"<<endl;
+    }
+    //win - Did someone win?, space - Is there any space available?
+    bool win=false, space = true;
+    string winner = "";
+    int x;
+
+    while (win==false and space==true) {
+        cout << "▷ ";
+        cin >> x;
+        while (x>9 and x<1) {
+            cout << "Enter numbers 1-9"<<endl<< "▷ ";
+            cin >> x;
+        }
+        while (tab[x-1]!="   ") {
+            cout << "This space is taken"<<endl<< "▷ ";
+            cin >> x;
+        }
+        tab[x-1]=" "+s+" ";
+        show_table(tab);
+    }
+
 }
 
 void game2(string name) {
@@ -33,6 +80,7 @@ void game2(string name) {
 
 //function "int main(){}" for testing purposes
 int main() {
+    srand(time(0));
     tictactoe("Critter");
     return 0;
 }
