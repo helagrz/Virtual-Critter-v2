@@ -29,7 +29,7 @@ void play() {
     x = stoi(input());
     switch (x) {
         case 1: {
-            while (tictactoe(c[curr].name)) {}
+            cout << c[curr].update_level(tictactoe(c[curr].name)/10)<<endl;
             break;
         }
         case 2: game2(c[curr].name);break;
