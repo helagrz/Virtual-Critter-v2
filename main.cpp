@@ -21,12 +21,31 @@ void feed() {
     cout << c[curr].update_hunger(2)<<endl;
 }
 
-void c_selection() {
-
-}
-
 bool valid_name(string x) {
     return true;
+}
+
+void c_selection() {
+    cout << "You have the total of "<<c.size()<<" critters!" << endl;
+    string symbol = "";
+    for (int i=0;i<c.size();i++) {
+        if (i == curr) {
+            symbol = "▶ ";
+        }
+        else {
+            symbol = to_string(i+1);
+            symbol += " - ";
+        }
+        string n = c[i].name;
+        transform(n.begin(),n.end(),n.begin(),::toupper);
+        cout <<symbol<< n<<endl;
+    }
+    cout << c.size()+1 << " - BACK" << endl;
+    int x = stoi(input());
+    if (x>0 and x<=c.size()) {
+        curr = x-1;
+        cout << "You choose " << c[curr].name << endl;
+    }
 }
 
 void more() {
@@ -79,9 +98,8 @@ void more() {
         case 8:
             cout << "help()"<<endl;
             break;
-        case 9:
-            return;
     }
+    return;
 }
 
 bool selection() {
