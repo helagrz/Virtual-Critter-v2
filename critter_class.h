@@ -12,7 +12,7 @@ public:
 
     void name_critter() {
         string n;
-        cout << "hat name do you want to give your critter?"<<endl<< "▷ ";
+        cout << "What name do you want to give your critter?"<<endl<< "▷ ";
         cin >> n;
         n = capitalize(n);
         name = n;

@@ -3,12 +3,25 @@
 #include <vector>
 #include "critter_class.h"
 #include "games.cpp"
+#include <fstream>
 using namespace std;
 
 //Array with the critters
 vector <critter> c;
 //Index of current critter
 int curr = 0;
+
+void save() {
+    fstream file;
+    file.open("save.txt", ios::out | ios::trunc);
+    file << c.size()<<endl;
+    for (int i=0;i<c.size();i++) {
+        file << c[i].name<<endl;
+        file << c[i].hunger<<endl;
+        file << c[i].level<<endl;
+    }
+    file.close();
+}
 
 string input() {
     string type;
@@ -86,7 +99,7 @@ void more() {
             c[curr].name = a;
             break;
         }
-        case 3: cout << "save()"<<endl; break;
+        case 3: save(); break;
         case 4: cout << "load()"<<endl; break;
         case 5: {
             cout << "Are you sure you want to add another critter? (To proceed enter \'yes\')"<<endl;
