@@ -38,8 +38,13 @@ void load() {
         c[curr].name = content[i+1];
         c[curr].hunger  = stoi(content[i+2]);
         c[curr].level = stoi(content[i+3]);
-        c[curr].info();
     }
+    /*
+    for (int i=0;i<c.size()-1;i++) {
+        cout<<"▷ "<<c[i].name<<endl;
+    }
+    cout << "  ▶ "<<c[curr].name<<endl;
+    */
     file.close();
 }
 
@@ -126,7 +131,7 @@ void more() {
             string a = input();
             if (a == "yes") {
                 c.push_back(critter());
-                curr++;
+                curr=c.size()-1;
                 c[curr].name_critter();
                 c[curr].info();
             }
@@ -171,11 +176,12 @@ bool selection() {
 
 int main() {
     bool cont = true;
-    c.push_back(critter());
-    c[curr].name_critter();
+    load();
+    c_selection();
 
     while (cont) {
         cont = selection();
+        save();
     }
 
     return 0;
