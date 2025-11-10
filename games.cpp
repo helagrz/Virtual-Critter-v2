@@ -78,7 +78,7 @@ int tictactoe(string name) {
         }
         cout << "You choose to play tictactoe with "<<name<<endl<<endl;
         cout << "    TICTACTOE   "<<endl;
-        cout<<"-----------------"<<endl;
+        cout <<"-----------------"<<endl;
         cout <<"    1 | 2 | 3 "<<endl<<"    ---------"<<endl;
         cout <<"    4 | 5 | 6 "<<endl<<"    ---------"<<endl;
         cout <<"    7 | 8 | 9 "<<endl;
@@ -178,6 +178,13 @@ int tictactoe(string name) {
     return exp;
 }
 
-void game2(string name) {
-    cout << "You choose to play game2 with "<<name<<endl;
+void hangman(string name) {
+    cout << "You choose to play hangman with "<<name<<endl<<endl;;
+    cout << "    HANGMAN   "<<endl;
+    cout <<"-----------------"<<endl;
+}
+
+int main() {
+    hangman("Critter");
+    return 0;
 }

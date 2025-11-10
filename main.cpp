@@ -70,7 +70,7 @@ void play() {
             cout << c[curr].update_level(tictactoe(c[curr].name)/10)<<endl;
             break;
         }
-        case 2: game2(c[curr].name);break;
+        case 2: hangman(c[curr].name);break;
     }
 
 }
@@ -174,7 +174,7 @@ bool selection() {
     return true;
 }
 
-int main() {
+int main2() {
     bool cont = true;
     load();
     c_selection();
