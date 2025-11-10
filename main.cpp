@@ -23,6 +23,26 @@ void save() {
     file.close();
 }
 
+void load() {
+    fstream file("save.txt");
+    vector <string> content;
+    string line;
+
+    c.clear();
+    while(getline(file, line)) {
+        content.push_back(line);
+    }
+    for (int i=0;i<stoi(content[0])*3;i+=3) {
+        c.push_back(critter());
+        curr = c.size()-1;
+        c[curr].name = content[i+1];
+        c[curr].hunger  = stoi(content[i+2]);
+        c[curr].level = stoi(content[i+3]);
+        c[curr].info();
+    }
+    file.close();
+}
+
 string input() {
     string type;
     cout << "▷ ";
@@ -100,7 +120,7 @@ void more() {
             break;
         }
         case 3: save(); break;
-        case 4: cout << "load()"<<endl; break;
+        case 4: load(); break;
         case 5: {
             cout << "Are you sure you want to add another critter? (To proceed enter \'yes\')"<<endl;
             string a = input();
