@@ -146,9 +146,13 @@ void more() {
             }
             break;
             }
-        case 7:
-            cout << "reset()"<<endl;
+        case 7: {
+            c.clear();
+            curr=0;
+            c.push_back(critter());
+            c[curr].name_critter();
             break;
+        }
         case 8:
             cout << "help()"<<endl;
             break;
