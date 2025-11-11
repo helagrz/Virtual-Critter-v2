@@ -179,6 +179,42 @@ int tictactoe(string name) {
     return exp;
 }
 
+string l[6];
+void man(int index) {
+    switch (index) {
+        case 1: {
+            l[5] = "____________\n";
+            for (int i=0; i<4;i++) {
+                l[i]=" \n";
+            }
+            break;
+        }
+        case 2: {
+            l[5] = "|___________\n";
+            for (int i=0; i<5;i++) {
+                l[i]="| \n";
+            }
+            break;
+        }
+        case 3: l[0]="____________\n";break;
+        case 4: {
+            l[1] ="|  /     |  \n";
+            l[2] ="| /    \n";
+            l[3] ="|/     \n";
+            break;
+        }
+        case 5: l[2]="| /      O \n";break;
+        case 6: l[3]="|/       | \n";break;
+        case 7: l[3]="|/      /| \n";break;
+        case 8: l[3]="|/      /|\\ \n";break;
+        case 9: l[4]="|        / \n";break;
+        case 10: l[4]="|        /\\  \n";break;
+    }
+    for (int i=0; i<6;i++) {
+        cout << l[i];
+    }
+}
+
 void hangman(string name) {
     srand(time(0));
     cout << "You choose to play hangman with "<<name<<endl<<endl;;
@@ -244,6 +280,8 @@ void hangman(string name) {
                     answer = word;
                 }
                 else {
+                    index++;
+                    man(index);
                     cout << "Wrong, it's not "<<letter<<endl;
                 }
             }
@@ -274,6 +312,7 @@ void hangman(string name) {
                 else {
                     wrong.push_back(letter);
                     index++;
+                    man(index);
                     cout << "No "<<letter<<endl;
                     cout << "Wrong letters: ";
                     for (int i=0; i<wrong.size(); i++) {
