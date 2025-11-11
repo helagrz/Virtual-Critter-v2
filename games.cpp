@@ -188,21 +188,55 @@ void hangman(string name) {
     int exp=0;
     bool play_again = true;
     while (play_again) {
-        string words[8] = {"MEADOW", "HANGMAN", "COMPUTER", "RIVER", "TENNIS", "WORLD", "CRITTER", "FOREST"};
+        string dif1[4] ={"MEADOW", "HANGMAN", "COMPUTER", "CRITTER"};
+        string dif2[4] = {"INTEGRATE", "COMPUTER SCIENCE", "PLAYING WITH CRITTER", "EXPECTATIONS"};
+        string words[4];
         vector <string> wrong;
-        string word = words[random_int_in_range(0,7)], answer="";
+
+        cout << "What difficulty?" <<endl<< "Easy - basic words"<< endl <<"Hard - advanced vocabulary and sentences"<<endl;
+        string difficulty="";
+        cout << "▷ ";
+        cin >> ws;
+        getline(cin, difficulty);
+        while (difficulty!="easy" and difficulty!="hard") {
+            cout << "Enter 'easy' or 'hard'"<<endl;
+            cout << "▷ ";
+            cin >> difficulty;
+        }
+        if (difficulty=="easy") {
+            for (int i=0;i<4;i++) {
+                words[i]=dif1[i];
+            }
+        }
+        else {
+            for (int i=0;i<4;i++) {
+                words[i]=dif2[i];
+            }
+        }
+
+        string word = words[random_int_in_range(0,3)], answer="";
         int index = 0;
 
         for (int i=0; i<word.length(); i++) {
-            answer+="_";
+            if (word[i]==' ') {
+                answer+=" ";
+            }
+            else {
+                answer+="_";
+            }
         }
         cout << answer << endl;
         while (answer!=word and index<10) {
-            string letter="";
+            string letter;
             cout << "▷ ";
-            cin >> letter;
+            cin >> ws;
+            getline(cin,letter);
+            while (letter=="") {
+                cout << "You can only guess letters or whole words"<<endl;
+                cout << "▷ ";
+                getline(cin,letter);
+            }
             transform(letter.begin(),letter.end(),letter.begin(),::toupper);
-
             if (letter.length()>1) {
                 if (letter==word) {
                     cout << "You guessed it!"<<endl;
@@ -241,11 +275,11 @@ void hangman(string name) {
                     wrong.push_back(letter);
                     index++;
                     cout << "No "<<letter<<endl;
-                    cout << "`wrong letters: "<<"[";
+                    cout << "Wrong letters: ";
                     for (int i=0; i<wrong.size(); i++) {
-                        cout << wrong[i]<<", ";
+                        cout << wrong[i]<<" ";
                     }
-                    cout << "]"<<endl;
+                    cout <<endl;
                 }
                 cout << answer<<endl;
             }
@@ -253,10 +287,12 @@ void hangman(string name) {
         if(index>=10) {
             cout <<"You lose"<<endl;
             cout <<"The word was: "<<word << endl;
-            exp+=0;
         }
         else {
             cout << "Congratulations!"<<endl;exp+=10;
+            if (difficulty=="hard") {
+                exp+=10;
+            }
         }
         cout << "Do you want to play again? (enter \'yes\')"<<endl;
         string x;
