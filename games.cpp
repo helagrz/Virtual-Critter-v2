@@ -215,7 +215,7 @@ void man(int index) {
     }
 }
 
-void hangman(string name) {
+int hangman(string name) {
     srand(time(0));
     cout << "You choose to play hangman with "<<name<<endl<<endl;;
     cout << "    HANGMAN   "<<endl;
@@ -345,10 +345,6 @@ void hangman(string name) {
             play_again =  false;
         }
     }
+    return exp;
 
-}
-
-int main() {
-    hangman("Critter");
-    return 0;
 }

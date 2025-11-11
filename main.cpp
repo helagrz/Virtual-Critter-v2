@@ -62,7 +62,7 @@ void feed() {
 
 void play() {
     cout << "What game do you want to play?"<<endl;
-    cout << "1 - TICTACTOE"<<endl<<"2 - GAME 2"<<endl<<"3 - BACK"<<endl<<endl;
+    cout << "1 - TICTACTOE"<<endl<<"2 - HAMGMAN"<<endl<<"3 - BACK"<<endl<<endl;
     int x = 0;
     x = stoi(input());
     switch (x) {
@@ -70,7 +70,10 @@ void play() {
             cout << c[curr].update_level(tictactoe(c[curr].name)/10)<<endl;
             break;
         }
-        case 2: hangman(c[curr].name);break;
+        case 2: {
+            cout << c[curr].update_level(hangman(c[curr].name)/10)<<endl;
+            break;
+        }
     }
 
 }
@@ -178,7 +181,7 @@ bool selection() {
     return true;
 }
 
-int main2() {
+int main() {
     bool cont = true;
     load();
     c_selection();
