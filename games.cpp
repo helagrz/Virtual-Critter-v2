@@ -180,60 +180,85 @@ int tictactoe(string name) {
 }
 
 void hangman(string name) {
+    srand(time(0));
     cout << "You choose to play hangman with "<<name<<endl<<endl;;
     cout << "    HANGMAN   "<<endl;
     cout <<"-----------------"<<endl;
 
-    string words[8] = {"MEADOW", "HANGMAN", "COMPUTER", "RIVER", "TENNIS", "WORLD", "CRITTER", "FOREST"};
-    vector <string> wrong;
-    string word = words[random_int_in_range(0,7)], answer="";
-    int index = 0, exp = 0;
+    int exp=0;
+    bool play_again = true;
+    while (play_again) {
+        string words[8] = {"MEADOW", "HANGMAN", "COMPUTER", "RIVER", "TENNIS", "WORLD", "CRITTER", "FOREST"};
+        vector <string> wrong;
+        string word = words[random_int_in_range(0,7)], answer="";
+        int index = 0;
 
-    for (int i=0; i<word.length(); i++) {
-        answer+="_";
-    }
-    cout << answer << endl;
-    while (answer!=word and index<10) {
-        string letter="";
-        cout << "▷ ";
-        cin >> letter;
-        transform(letter.begin(),letter.end(),letter.begin(),::toupper);
-
-        //if(letter in word and letter not in wrong)
-        if ((word.find(letter)!=string::npos and find(wrong.begin(), wrong.end(), letter)==wrong.end()) and answer.find(letter)==string::npos) {
-            string ans_array[answer.length()];
-            for (int i=0; i<answer.length(); i++) {
-                ans_array[i] = answer[i];
-            }
-            for (int i=0; i<word.length(); i++) {
-                string s = string() + word[i];
-                if (letter==s) {
-                    ans_array[i]=letter;
-                }
-            }
-            string temp_ans = "";
-            for (int i=0; i<answer.length(); i++) {
-                temp_ans += ans_array[i];
-            }
-            answer = temp_ans;
-
+        for (int i=0; i<word.length(); i++) {
+            answer+="_";
         }
-        //if(letter in answer or letter in wrong)
-        else if (answer.find(letter)!=string::npos or find(wrong.begin(), wrong.end(), letter)!=wrong.end()) {
-            cout << "You already guessed that letter"<<endl;
+        cout << answer << endl;
+        while (answer!=word and index<10) {
+            string letter="";
+            cout << "▷ ";
+            cin >> letter;
+            transform(letter.begin(),letter.end(),letter.begin(),::toupper);
+
+            //if((letter in word and letter not in wrong) and letter not in answer)
+            if ((word.find(letter)!=string::npos and find(wrong.begin(), wrong.end(), letter)==wrong.end()) and answer.find(letter)==string::npos) {
+                string ans_array[answer.length()];
+                for (int i=0; i<answer.length(); i++) {
+                    ans_array[i] = answer[i];
+                }
+                for (int i=0; i<word.length(); i++) {
+                    string s = string() + word[i];
+                    if (letter==s) {
+                        ans_array[i]=letter;
+                    }
+                }
+                string temp_ans = "";
+                for (int i=0; i<answer.length(); i++) {
+                    temp_ans += ans_array[i];
+                }
+                answer = temp_ans;
+
+            }
+            //if(letter in answer or letter in wrong)
+            else if (answer.find(letter)!=string::npos or find(wrong.begin(), wrong.end(), letter)!=wrong.end()) {
+                cout << "You already guessed that letter"<<endl;
+            }
+            else {
+                wrong.push_back(letter);
+                index++;
+                cout << "No "<<letter<<endl;
+                cout << "`wrong letters: "<<"[";
+                for (int i=0; i<wrong.size(); i++) {
+                    cout << wrong[i]<<", ";
+                }
+                cout << "]"<<endl;
+            }
+            cout << answer<<endl;
+        }
+        if(index>=10) {
+            cout <<"You lose"<<endl;
+            cout <<"The word was: "<<word << endl;
+            exp+=0;
         }
         else {
-            wrong.push_back(letter);
-            index++;
-            cout << "No "<<letter<<endl;
-            cout << "`wrong letters: "<<"[";
-            for (int i=0; i<wrong.size(); i++) {
-                cout << wrong[i]<<", ";
-            }
-            cout << "]"<<endl;
+            cout << "Congratulations!"<<endl;exp+=100;
         }
-        cout << answer<<endl;
+        cout << "Do you want to play again? (enter \'yes\')"<<endl;
+        string x;
+        cout << "▷ ";
+        cin >> x;
+        if (x=="yes") {
+            play_again =  true;
+        }
+        else {
+            cout << "You get "<<exp<<" exp"<<endl;
+            play_again =  false;
+        }
     }
+
 }
 
 int main() {
