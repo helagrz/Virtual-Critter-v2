@@ -203,40 +203,52 @@ void hangman(string name) {
             cin >> letter;
             transform(letter.begin(),letter.end(),letter.begin(),::toupper);
 
-            //if((letter in word and letter not in wrong) and letter not in answer)
-            if ((word.find(letter)!=string::npos and find(wrong.begin(), wrong.end(), letter)==wrong.end()) and answer.find(letter)==string::npos) {
-                string ans_array[answer.length()];
-                for (int i=0; i<answer.length(); i++) {
-                    ans_array[i] = answer[i];
+            if (letter.length()>1) {
+                if (letter==word) {
+                    cout << "You guessed it!"<<endl;
+                    exp +=10;
+                    answer = word;
                 }
-                for (int i=0; i<word.length(); i++) {
-                    string s = string() + word[i];
-                    if (letter==s) {
-                        ans_array[i]=letter;
-                    }
+                else {
+                    cout << "Wrong, it's not "<<letter<<endl;
                 }
-                string temp_ans = "";
-                for (int i=0; i<answer.length(); i++) {
-                    temp_ans += ans_array[i];
-                }
-                answer = temp_ans;
-
-            }
-            //if(letter in answer or letter in wrong)
-            else if (answer.find(letter)!=string::npos or find(wrong.begin(), wrong.end(), letter)!=wrong.end()) {
-                cout << "You already guessed that letter"<<endl;
             }
             else {
-                wrong.push_back(letter);
-                index++;
-                cout << "No "<<letter<<endl;
-                cout << "`wrong letters: "<<"[";
-                for (int i=0; i<wrong.size(); i++) {
-                    cout << wrong[i]<<", ";
+                //if((letter in word and letter not in wrong) and letter not in answer)
+                if ((word.find(letter)!=string::npos and find(wrong.begin(), wrong.end(), letter)==wrong.end()) and answer.find(letter)==string::npos) {
+                    string ans_array[answer.length()];
+                    for (int i=0; i<answer.length(); i++) {
+                        ans_array[i] = answer[i];
+                    }
+                    for (int i=0; i<word.length(); i++) {
+                        string s = string() + word[i];
+                        if (letter==s) {
+                            ans_array[i]=letter;
+                        }
+                    }
+                    string temp_ans = "";
+                    for (int i=0; i<answer.length(); i++) {
+                        temp_ans += ans_array[i];
+                    }
+                    answer = temp_ans;
+
                 }
-                cout << "]"<<endl;
+                //if(letter in answer or letter in wrong)
+                else if (answer.find(letter)!=string::npos or find(wrong.begin(), wrong.end(), letter)!=wrong.end()) {
+                    cout << "You already guessed that letter"<<endl;
+                }
+                else {
+                    wrong.push_back(letter);
+                    index++;
+                    cout << "No "<<letter<<endl;
+                    cout << "`wrong letters: "<<"[";
+                    for (int i=0; i<wrong.size(); i++) {
+                        cout << wrong[i]<<", ";
+                    }
+                    cout << "]"<<endl;
+                }
+                cout << answer<<endl;
             }
-            cout << answer<<endl;
         }
         if(index>=10) {
             cout <<"You lose"<<endl;
@@ -244,7 +256,7 @@ void hangman(string name) {
             exp+=0;
         }
         else {
-            cout << "Congratulations!"<<endl;exp+=100;
+            cout << "Congratulations!"<<endl;exp+=10;
         }
         cout << "Do you want to play again? (enter \'yes\')"<<endl;
         string x;
